@@ -27,6 +27,7 @@ class ExamController extends Controller
     {
         $request->validate([
             'SchoolName' => 'required|string',
+            'SchoolLogo' => 'required|image|mimes:jpg,png,jpeg,svg|max:200',
             'Exam_Briefing' => 'required|string',
             'Exam_Intructions' => 'required|string',
             'Exam_Questions' => 'required|string',
