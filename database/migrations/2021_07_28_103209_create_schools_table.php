@@ -19,15 +19,14 @@ class CreateSchoolsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->string('name')->unique();
-            $table->string('password');
-            $table->string('special_key')->unique();
+            $table->string('access_key')->unique();
             $table->enum('account_type',['basic','premium']);
             $table->string('website')->nullable();
             $table->binary('logo');
             $table->enum("account_status",['active','unactive','disable']);
             $table->longText('description');
             $table->string('email')->unique();
-            $table->integer('phone');
+            $table->string('phone');
         });
     }
 

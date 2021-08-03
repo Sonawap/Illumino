@@ -10,7 +10,6 @@ class school extends Model
     use HasFactory;
     protected $fillable=[
         'name',
-        'password',
         'account_type',
         'website',
         'logo',
@@ -21,8 +20,8 @@ class school extends Model
     ];
 
     protected $hidden = [
-        'password',
-        'special_key'
+
+        'access_key'
     ];
      /*
     *   relationships

@@ -2,16 +2,25 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+// <<<<<<< Christian
+// =======
+// use Illuminate\Database\Eloquent\Factories\HasFactory;
+// >>>>>>> main
+// use Illuminate\Database\Eloquent\Model;
 
-class Score extends Model
-{
-    protected $fillable=[
-        'SchoolName',
-        'name',
-        'utme_reg_no',
-        'course',
-        'score',
-        'user_image',
-    ];
-}
+// class Score extends Model
+// {
+// <<<<<<< Christian
+//     protected $fillable=[
+//         'SchoolName',
+//         'name',
+//         'utme_reg_no',
+//         'course',
+//         'score',
+//         'user_image',
+//     ];
+// =======
+//     use HasFactory;
+    
+// >>>>>>> main
+// }
