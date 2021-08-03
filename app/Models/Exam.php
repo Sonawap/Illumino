@@ -9,7 +9,9 @@ class Exam extends Model
 {
     use HasFactory;
     protected $fillable=[
+        'school_id',
         'SchoolName',
+        'SchoolLogo',
         'Exam_Briefing',
         'Exam_Intructions',
         'Exam_Questions',
@@ -22,4 +24,9 @@ class Exam extends Model
         'Exam_Stop',
         'exam_status',
     ];
+
+    public function school(){
+        
+        return $this->belongsTo(School::class);
+    }
 }

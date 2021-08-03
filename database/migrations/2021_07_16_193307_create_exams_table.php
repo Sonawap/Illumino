@@ -15,6 +15,8 @@ class CreateExamsTable extends Migration
     {
         Schema::create('exams', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('school_id');
+            $table->string('SchoolLogo');
             $table->string('SchoolName')->unique();
             $table->string('Exam_Briefing');
             $table->string('Exam_Intructions')->nullable();
