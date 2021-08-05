@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateScoreTable extends Migration
+class CreateBlogsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,16 @@ class CreateScoreTable extends Migration
      */
     public function up()
     {
-        Schema::create('score', function (Blueprint $table) {
+        Schema::create('blogs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('school_id');
-            $table->foreignId('subject_id');
-            $table->foreignId('student_id');
-            $table->unsignedInterger('score');
-            $table->date('created_at');
-            $table->softDeletes();
+            $table->string('title');
+            $table->string('date');
+            $table->string('recipients');
+            $table->text('body');
+            $table->integer('school_id')->references('id')->on('schools');
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 
@@ -32,6 +33,6 @@ class CreateScoreTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('score');
+        Schema::dropIfExists('blogs');
     }
 }

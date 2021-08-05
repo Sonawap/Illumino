@@ -15,20 +15,16 @@ class CreateExamsTable extends Migration
     {
         Schema::create('exams', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('school_id');
-            $table->string('SchoolLogo');
-            $table->string('SchoolName')->unique();
-            $table->string('Exam_Briefing');
-            $table->string('Exam_Intructions')->nullable();
-            $table->string('Exam_Questions')->nullable();
-            $table->string('Option_A')->nullable();
-            $table->string('Option_B')->nullable();
-            $table->string('Option_C')->nullable();
-            $table->string('Option_D');
-            $table->string('Correct_Option');
-            $table->enum('exam_status', ['inStock', 'outStock']);
-            $table->string('Exam_Start');
-            $table->string('Exam_Stop');
+
+            $table->integer('total_subject');
+            $table->integer('questions_per_subject');
+            $table->string('exam_Intruction');
+            $table->string('exam_date');
+            $table->string('student_delay');
+            $table->boolean('randomize_questions');
+            $table->boolean('randomize_answer');
+            $table->boolean('exam_end_instruction');
+            $table->string('year');
             $table->timestamps();
         });
     }

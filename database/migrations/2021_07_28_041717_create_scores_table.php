@@ -15,12 +15,14 @@ class CreateScoresTable extends Migration
     {
         Schema::create('scores', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('utme_reg_no')->unique();
-            $table->string('course');
-            $table->string('score');
-            $table->string('user_image');
+            $table->string('user_id')->references('id')->on('users');;
+            $table->string('total_score');
+            $table->string('subject1_score');
+            $table->string('subject2_score');
+            $table->string('subject3_score');
+            $table->string('subject4_score');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
