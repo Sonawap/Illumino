@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubjectsTable extends Migration
+class AddToExamsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,9 @@ class CreateSubjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('subjects', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->text('description');
+        Schema::table('exams', function (Blueprint $table) {
             $table->foreignId('school_id')->references('id')->on('schools');
-            $table->softDeletes();
-
-
-
-
+            $table->foreignId('course_id')->references('id')->on('courses');
         });
     }
 
@@ -33,6 +26,8 @@ class CreateSubjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subjects');
+        Schema::table('exams', function (Blueprint $table) {
+            //
+        });
     }
 }
