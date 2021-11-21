@@ -13,9 +13,9 @@ class AddToSchoolsTable extends Migration
      */
     public function up()
     {
-        Schema::table('schools', function (Blueprint $table) {
-            $table->integer('school_id')->references('id')->on('schools');
-        });
+        // Schema::table('schools', function (Blueprint $table) {
+        //     $table->integer('school_id')->references('id')->on('schools');
+        // });
     }
 
     /**

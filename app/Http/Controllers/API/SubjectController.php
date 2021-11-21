@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Models\Subject;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class SubjectController extends Controller
 {
@@ -18,7 +19,7 @@ class SubjectController extends Controller
             'name' => 'required',
             'description' => 'required',
             'school_id' => 'required'
-            
+
 
         ]);
         $create_subject =  Subject::create($request->all());
@@ -27,7 +28,7 @@ class SubjectController extends Controller
             'create_subject' => $create_subject,
         ];
         return response($response, 200);
-        
+
     }
 
     //function to display specific subject

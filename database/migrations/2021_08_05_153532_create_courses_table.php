@@ -17,8 +17,12 @@ class CreateCoursesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('code');
-            $table->text('subjects_id');
-            $table->foreignId('school_id')->references('id')->on('schools');
+            $table->json('subjects_id');
+            $table->foreignId('school_id')
+                ->nullable()
+                ->constrained('schools')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
 

@@ -15,7 +15,11 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id')->references('id')->on('users');
+            $table->foreignId('user_id')
+                ->nullable()
+                ->constrained('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->string('reference');
             $table->string('payment_id');
             $table->string('amount');

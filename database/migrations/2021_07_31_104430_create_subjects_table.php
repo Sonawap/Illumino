@@ -16,13 +16,19 @@ class CreateSubjectsTable extends Migration
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description');
-            $table->foreignId('school_id')->references('id')->on('schools');
+            $table->string('code');
+            $table->timestamps();
             $table->softDeletes();
-
-
-
-
+            $table->foreignId('school_id')
+                ->nullable()
+                ->constrained('schools')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreignId('course_id')
+                ->nullable()
+                ->constrained('courses')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

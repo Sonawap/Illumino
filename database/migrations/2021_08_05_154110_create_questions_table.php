@@ -15,15 +15,29 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->text('question');
-            $table->string('option_A');
-            $table->string('option_B');
-            $table->string('option_C');
-            $table->string('option_D');
+            $table->foreignId('subject_id')
+                ->nullable()
+                ->constrained('subjects')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreignId('school_id')
+                ->nullable()
+                ->constrained('schools')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreignId('exam_id')
+                ->nullable()
+                ->constrained('exams')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->string('question');
+            $table->string('optionA');
+            $table->string('optionB');
+            $table->string('optionC');
+            $table->string('optionD');
             $table->string('correct_option');
-            $table->string('subject_id')->references('id')->on('subjects');
-            $table->string('year');
             $table->timestamps();
+
             $table->softDeletes();
 
         });

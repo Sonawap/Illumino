@@ -1,15 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Models\Score;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ScoreController extends Controller
 
 {
     public function index()
     {
-       
+
     }
 
     public function store(Request $request)
@@ -27,5 +29,5 @@ class ScoreController extends Controller
         $score->save();
 
     }
-   
-}       
+
+}

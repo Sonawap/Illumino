@@ -13,10 +13,10 @@ class AddToExamsTable extends Migration
      */
     public function up()
     {
-        Schema::table('exams', function (Blueprint $table) {
-            $table->foreignId('school_id')->references('id')->on('schools');
-            $table->foreignId('course_id')->references('id')->on('courses');
-        });
+        // Schema::table('exams', function (Blueprint $table) {
+        //     $table->foreignId('school_id')->references('id')->on('schools');
+        //     $table->foreignId('course_id')->references('id')->on('courses');
+        // });
     }
 
     /**

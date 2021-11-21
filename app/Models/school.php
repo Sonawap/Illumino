@@ -2,27 +2,33 @@
 
 namespace App\Models;
 
+use App\Models\Subject;
+use App\Models\Question;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\School as Authenticatable;
 
-class School extends Model
+
+class School extends Authenticatable
 {
-    use HasFactory;
+    use  HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+
     protected $fillable=[
         'name',
         'account_type',
         'website',
+        'access_key',
         'logo',
         'account_status',
         'description',
         'email',
         'phone',
+        'password',
+
     ];
 
-    protected $hidden = [
-
-        'access_key'
-    ];
      /*
     *   relationships
     */
@@ -32,6 +38,14 @@ class School extends Model
 
     public function admins(){
         return $this->hasMany(Admin::class);
+    }
+
+    public function subjects(){
+        return $this->hasMany(Subject::class);
+    }
+
+    public function questions(){
+        return $this->hasMany(Question::class);
     }
 
     public function blogs(){
@@ -49,4 +63,8 @@ class School extends Model
     public function payments(){
         return $this->hasMany(Payment::class);
     }
+
+    // public function setPasswordAttribute($value){
+    //     $this->attributes['password'] = bcrypt($value);
+    // }
 }

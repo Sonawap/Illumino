@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateScoresTable extends Migration
+class CreateAnswersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateScoresTable extends Migration
      */
     public function up()
     {
-        Schema::create('scores', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->foreignId('students_id')
+        Schema::create('answers', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('subject_id')
                 ->nullable()
-                ->constrained('students')
+                ->constrained('subjects')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->foreignId('school_id')
@@ -30,14 +30,18 @@ class CreateScoresTable extends Migration
                 ->constrained('courses')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->string('total_score');
-            $table->string('subject1_score');
-            $table->string('subject2_score');
-            $table->string('subject3_score');
-            $table->string('subject4_score');
-            $table->string('exam_date');
+            $table->foreignId('student_id')
+                ->nullable()
+                ->constrained('students')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreignId('question_id')
+                ->nullable()
+                ->constrained('questions')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->string('selected_option');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -48,6 +52,6 @@ class CreateScoresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('scores');
+        Schema::dropIfExists('answers');
     }
 }

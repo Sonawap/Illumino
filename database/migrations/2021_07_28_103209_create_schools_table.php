@@ -22,15 +22,16 @@ class CreateSchoolsTable extends Migration
             $table->string('access_key')->unique();
             $table->enum('account_type',['basic','premium']);
             $table->string('website')->nullable();
-            $table->binary('logo');
-            $table->enum("account_status",['active','unactive','disable']);
+            $table->text('logo');
+            $table->enum("account_status",['active','unactive','disabled'])->default('active');
             $table->longText('description');
             $table->string('email')->unique();
             $table->string('phone');
+            $table->string('password');
         });
     }
 
-   
+
     /**
      * Reverse the migrations.
      *
@@ -41,5 +42,5 @@ class CreateSchoolsTable extends Migration
         Schema::dropIfExists('schools');
     }
 
-   
+
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\School;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,20 +13,27 @@ class Question extends Model
 
     protected $fillable=[
         'question',
-        'option_A',
-        'option_B',
-        'option_C',
-        'option_D',
+        'optionA',
+        'optionB',
+        'optionC',
+        'optionD',
         'correct_option',
         'subject_id',
-        'student_id',
-        'year',
+        'school_id',
+    ];
+
+    protected $hidden = [
+        'correct_option'
     ];
 
     public function subject(){
         return $this->belongsTo(Subject::class);
     }
 
+
+    public function school(){
+        return $this->belongsTo(School::class);
+    }
     public function student_id(){
         return $this->belongsTo(Student::class);
     }

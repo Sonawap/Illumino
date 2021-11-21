@@ -46,6 +46,27 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+        'school' => [
+            'driver' => 'session',
+            'provider' => 'schools',
+        ],
+
+        'school-api' => [
+            'driver' => 'token',
+            'provider' => 'schools',
+            'hash' => false,
+        ],
+
+        'student' => [
+            'driver' => 'session',
+            'provider' => 'students',
+        ],
+
+        'student-api' => [
+            'driver' => 'token',
+            'provider' => 'students',
+            'hash' => false,
+        ],
     ],
 
     /*
@@ -69,6 +90,16 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+
+        'schools' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\School::class,
+        ],
+
+        'students' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Student::class,
         ],
 
         // 'users' => [

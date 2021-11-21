@@ -15,17 +15,26 @@ class CreateExamsTable extends Migration
     {
         Schema::create('exams', function (Blueprint $table) {
             $table->id();
-
-            $table->integer('total_subject');
-            $table->integer('questions_per_subject');
-            $table->string('exam_Intruction');
-            $table->string('exam_date');
-            $table->string('student_delay');
-            $table->boolean('randomize_questions');
-            $table->boolean('randomize_answer');
-            $table->boolean('exam_end_instruction');
-            $table->string('year');
+            $table->foreignId('school_id')
+                ->nullable()
+                ->constrained('schools')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreignId('course_id')
+                ->nullable()
+                ->constrained('courses')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->string('exam_intructions');
+            $table->string('exam_end_intructions');
+            $table->string('total_subjects');
+            $table->string('questions_per_subject');
+            $table->timestamp('exam_date');
+            $table->string('student_delay_time');
+            $table->string('randomize_questions');
+            $table->string('randomize_answers');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

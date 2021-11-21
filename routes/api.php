@@ -2,48 +2,64 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ExamController;
-use App\Http\Controllers\AuthController;
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+use App\Http\Controllers\API\{
+    AuthController,
+    ExamController,
+    SchoolController,
+    QuestionController,
+    StudentController
+};
+use App\Http\Controllers\API\School\{
+    SchoolSubjectController,
+    SchoolExamController,
+    SchoolCourseController,
+    SchoolQuestionController,
+    SchoolStudentController
+};
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['prefix' => 'auth'], function() {
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+
+
+    Route::group(['prefix' => 'school'], function() {
+        Route::post('/login', [SchoolController::class, 'login']);
+        Route::post('/logout', [SchoolController::class, 'logout']);
+    });
+
+    Route::group(['prefix' => 'student'], function() {
+        Route::post('login', [StudentController::class, 'login']);
+        Route::post('/logout', [StudentController::class, 'logout']);
+    });
+
 });
 
-//public router
-// register
+Route::group(['middleware' => 'auth:sanctum'], function() {
 
-Route::get('/exams/search/{SchoolName}', [ExamController::class, 'search']);
-
-Route::post('/register', [AuthController::class, 'register']);
-
-Route::post('/login', [AuthController::class, 'login']);
+    Route::apiResources([
+        'exams' => ExamController::class,
+        'schools' => SchoolController::class,
+    ]);
 
 
-Route::group(['middleware' => ['auth:sanctum']],  function () {
+    Route::group(['prefix' => 'student'], function() {
+        Route::get('exam/questions/', [StudentController::class, 'examQuestions']);
+    });
 
-    Route::post('/exams/create',[ExamController::class, 'store']);
-
-    Route::get('/exams/all', [ExamController::class, 'index']);
-
-    Route::get('/exams/info/{id}', [ExamController::class, 'show']);
-
-    Route::put('/exams/update/{id}', [ExamController::class, 'update']);
-
-    Route::delete('/exams/delete/{id}', [ExamController::class, 'destroy']);
-    
-    Route::post('/exams/logout',  [AuthController::class, 'logout']);
 });
 
+Route::group(['middleware' => 'school', 'prefix' => 'client'], function() {
+
+    Route::apiResources([
+        'exams' => SchoolExamController::class,
+        'subjects' => SchoolSubjectController::class,
+        'courses' => SchoolCourseController::class,
+        'questions' => SchoolQuestionController::class,
+        'students' => SchoolStudentController::class,
+    ]);
+
+});
 
 
 

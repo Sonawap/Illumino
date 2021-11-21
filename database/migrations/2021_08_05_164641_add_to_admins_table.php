@@ -14,7 +14,11 @@ class AddToAdminsTable extends Migration
     public function up()
     {
         Schema::table('admins', function (Blueprint $table) {
-            $table->integer('school_id')->references('id')->on('schools');
+            $table->foreignId('school_id')
+                ->nullable()
+                ->constrained('schools')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

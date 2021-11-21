@@ -13,9 +13,9 @@ class AddToPaymentsTable extends Migration
      */
     public function up()
     {
-        Schema::table('payments', function (Blueprint $table) {
-            $table->integer('student_id')->references('id')->on('students');
-        });
+        // Schema::table('payments', function (Blueprint $table) {
+        //     $table->integer('student_id')->references('id')->on('students');
+        // });
     }
 
     /**

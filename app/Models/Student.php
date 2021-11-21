@@ -2,16 +2,21 @@
 
 namespace App\Models;
 
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\Student as Authenticatable;
 
-class Student extends Model
+class Student extends Authenticatable
 {
-    use HasFactory, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     protected $fillable=[
-        'name',
+        'first_name',
+        'middle_name',
+        'last_name',
         'email',
         'utme_reg_no',
         'password',
