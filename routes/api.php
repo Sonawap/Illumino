@@ -7,7 +7,8 @@ use App\Http\Controllers\API\{
     ExamController,
     SchoolController,
     QuestionController,
-    StudentController
+    StudentController,
+    BookingController
 };
 use App\Http\Controllers\API\School\{
     SchoolSubjectController,
@@ -17,6 +18,7 @@ use App\Http\Controllers\API\School\{
     SchoolStudentController
 };
 
+Route::post('booking', [BookingController::class, 'booking']);
 Route::group(['prefix' => 'auth'], function() {
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
